@@ -30,6 +30,10 @@ Nothing is hard-coded. Materials, parts, traits and recipes all come from what t
 - Alloy/compound materials and Starcharged/Charged modifiers can't be picked yet.
 - Traits that depend on the holder's current state (health, light level, ...) show their freshly crafted value.
 
+### Source code
+
+[github.com/Dawnforger/silent-gear-simulator](https://github.com/Dawnforger/silent-gear-simulator) (MIT). Bug reports go in the GitHub issues.
+
 ### AI disclosure
 
 This mod was developed with AI assistance. The code, documentation and logo were made with help from Claude, an AI assistant by Anthropic. The logo is pixel art drawn by a script, not by an AI image generator.
