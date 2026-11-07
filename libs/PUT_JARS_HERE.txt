@@ -1,0 +1,2 @@
+Put the Silent Gear 1.21.1 jar (silent-gear-1.21.1-neoforge-4.2.x.jar) and the
+Silent Lib 1.21.1 jar (silent-lib-1.21.1-neoforge-10.6.x.jar) in this folder before building.

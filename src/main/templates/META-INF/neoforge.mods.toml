@@ -1,0 +1,43 @@
+modLoader="javafml"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
+issueTrackerURL="https://github.com/Dawnforger/silent-gear-simulator/issues"
+
+[[mods]]
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+displayURL="https://github.com/Dawnforger/silent-gear-simulator"
+authors="highsocietyraiding"
+description='''
+Client-side planner for Silent Gear. Pick the parts, materials and grades you intend to use and see the
+exact tooltip and icon the finished item would have, computed from the materials, parts and recipes
+the server you are connected to has sent you.
+'''
+# Client-only: the server does not need this mod, and its presence/absence never blocks joining.
+displayTest="IGNORE_ALL_VERSION"
+
+[[dependencies.${mod_id}]]
+    modId="neoforge"
+    type="required"
+    versionRange="${neo_version_range}"
+    ordering="NONE"
+    side="CLIENT"
+
+[[dependencies.${mod_id}]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="CLIENT"
+
+[[dependencies.${mod_id}]]
+    modId="silentgear"
+    type="required"
+    versionRange="${silentgear_version_range}"
+    ordering="AFTER"
+    side="CLIENT"
+
+# Keeps Silent Gear's tooltip sections expanded while the simulator is open (checkboxes in the GUI)
+[[mixins]]
+config="sgsim.mixins.json"
