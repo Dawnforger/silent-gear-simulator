@@ -93,7 +93,7 @@ Maven access is needed (NeoForge, Mojang, Parchment).
 
 1. Put the 1.21.1 jars of **Silent Gear** (4.2.x) and **Silent Lib** (10.6.x) into `libs/`. The ones from
    your `mods` folder work. They are compile-only and are never bundled.
-2. `./gradlew build` produces `build/libs/sgsim-1.21.1-1.1.0.jar`
+2. `./gradlew build` produces `build/libs/sgsim-1.21.1-1.2.0.jar`
 3. `./gradlew runClient` launches a dev client with Silent Gear loaded.
 
 Put the built jar in your client's `mods` folder only. The server doesn't need it, and
@@ -103,7 +103,7 @@ Put the built jar in your client's `mods` folder only. The server doesn't need i
 
 * **Silent Gear's common config is not synced.** `silentgear-common.toml` contains per-property bonus
   multipliers. If a server changed them, copy the server's file into your local `config/` so the numbers match.
-* Alloy/compound materials made in Silent Gear's alloy machines, and Starcharged/Charged modifiers, aren't offered as choices yet. Only the grade modifier is applied.
+* Alloys (from the Alloys tab or the machines) and Starcharged/Charged modifiers aren't offered as part materials in the gear planner yet. Only the grade modifier is applied.
 * Recalculation runs with no player, like the crafting recipe. Traits whose bonus depends on the
   holder's current state (health, light level, ...) show their crafted value, just as a freshly crafted item would.
 

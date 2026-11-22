@@ -17,6 +17,16 @@ Nothing is hard-coded. Materials, parts, traits and recipes all come from what t
 - **Modpack aware.** Supports casting recipes (for example Silent Gear Metalworks in ATM10), part substitutes like blaze rods, and grading of cast parts when the pack allows it.
 - **Give (creative)** puts the planned item straight into your inventory.
 
+### Alloy calculator (new in 1.2.0)
+
+A second tab, **Alloys**, predicts what Silent Gear's alloy machines make before you feed them.
+
+- **Every alloy machine**: Alloy Forge, Recrystallizer, Refabricator, Crude Mixer and Super Mixer, with their real slot counts and accepted material categories.
+- **Weighted mixes.** Fill the input slots with materials and grades; repeating a material weights the mix, and the ratio is shown.
+- **Exact result.** Fixed recipes (blaze gold, crimson steel, ...) are matched first, otherwise the custom alloy is built by Silent Gear's own compounding code. If a machine would refuse the inputs, you're told why.
+- **Stat comparison.** A table puts every input next to the alloy for the part type you choose, highlighting where the alloy beats or falls below its inputs, followed by Silent Gear's full material tooltip with traits.
+- **Recipe list.** The machine's fixed recipes from the server, click one to load its inputs.
+
 ### Requirements
 
 - NeoForge 1.21.1
@@ -27,7 +37,7 @@ Nothing is hard-coded. Materials, parts, traits and recipes all come from what t
 ### Known limits
 
 - Silent Gear's common config isn't synced. If a server changed the stat multipliers in `silentgear-common.toml`, copy its file into your local `config/` folder so the numbers match.
-- Alloy/compound materials and Starcharged/Charged modifiers can't be picked yet.
+- Alloys from the Alloys tab, and Starcharged/Charged modifiers, can't be picked as part materials in the gear planner yet.
 - Traits that depend on the holder's current state (health, light level, ...) show their freshly crafted value.
 
 ### Source code
