@@ -1,7 +1,7 @@
 package dev.sgsim;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import dev.sgsim.client.SimulatorScreen;
+import dev.sgsim.client.Tabs;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
@@ -36,7 +36,7 @@ public final class SgSimMod {
         Minecraft mc = Minecraft.getInstance();
         while (OPEN_KEY.consumeClick()) {
             if (mc.level != null && mc.player != null && mc.screen == null) {
-                mc.setScreen(new SimulatorScreen());
+                mc.setScreen(Tabs.openLast());
             }
         }
     }

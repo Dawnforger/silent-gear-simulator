@@ -66,6 +66,27 @@ Build against the jars from the pack's own `mods` folder so the compile matches 
 * **Status line / red bullets**: anything the server would refuse, such as a missing required part, a material or grade the recipe rejects, a material count with no recipe, or a main material with no durability for that gear type.
 * **Give (creative)**: only shown in creative mode. Puts the item in your inventory using the vanilla creative-inventory packet.
 
+## Alloy calculator (Alloys tab)
+
+The tabs at the top switch between the gear planner and the alloy calculator; the open key brings
+back whichever tab you used last.
+
+* **Machine**: Alloy Forge, Recrystallizer, Refabricator, Crude Mixer or Super Mixer. Each has its
+  own slot count and accepted material categories, read from Silent Gear.
+* **Input slots**: one material item per slot, exactly as the machine consumes them (one of each slot
+  per operation), so putting a material in more slots weights the mix. The **Mix** list shows the
+  ratio. Right-click / scroll a slot for its grade, shift+right-click to empty it.
+* **Result**: the machine's logic is followed step by step. A matching fixed recipe (blaze gold,
+  crimson steel, ...) wins; otherwise two or more different simple materials are compounded by
+  Silent Gear's own `CompoundMaterialItem#create`. Red bullets explain why a machine would refuse
+  (wrong category, a single material, no shared part type, a compound input).
+* **Stat table**: every distinct input and the alloy side by side for one part type (click / scroll
+  to change it). Gear-type-specific stats follow the item chosen on the Gear tab. The alloy column is
+  green above every input and red below every input. Silent Gear's material tooltip for the alloy
+  (stats with modifiers, traits) follows underneath.
+* **Fixed recipes**: the machine's recipes from the server. Click one to load its inputs when they
+  are all Silent Gear materials.
+
 ## Building
 
 Maven access is needed (NeoForge, Mojang, Parchment).
@@ -95,7 +116,10 @@ dev/sgsim/sim/RecipeIndex.java       compound-part recipes from the client recip
 dev/sgsim/sim/SlotDef.java           one part slot + its recipes and acceptance check
 dev/sgsim/sim/GearSimulator.java     builds the item through Silent Gear's crafting code and collects problems
 dev/sgsim/sim/SimState.java          the player's selections (stored by id, safe across reloads)
-dev/sgsim/client/SimulatorScreen.java main GUI
+dev/sgsim/client/SimulatorScreen.java main GUI (Gear tab)
+dev/sgsim/client/AlloyScreen.java    alloy calculator (Alloys tab)
+dev/sgsim/client/Tabs.java           tab strip shared by both screens
+dev/sgsim/sim/AlloyCalc.java         alloy machine logic (recipe match, compounding rules)
 dev/sgsim/client/ListPopup.java      searchable, sortable popup list (gear items, materials)
 ```
 

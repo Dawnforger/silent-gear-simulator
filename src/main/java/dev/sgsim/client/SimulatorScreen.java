@@ -45,6 +45,7 @@ public class SimulatorScreen extends Screen {
     private static final SimState STATE = new SimState();
 
     private static final int PAD = 6;
+    private static final int TOP = Tabs.CONTENT_TOP;
     private static final int CELL = 18;
     private static final int CELL_STEP = 20;
     private static final int SLOT_H = 36;
@@ -105,6 +106,18 @@ public class SimulatorScreen extends Screen {
         super(Component.translatable("sgsim.title"));
     }
 
+    /** Gear type of the item being planned, so other tabs can show stats for the same gear. */
+    static GearType plannedGearType() {
+        GearItem gearItem = GearCatalog.gearItem(STATE.gearItem);
+        return gearItem != null ? gearItem.getGearType() : net.silentchaos512.gear.setup.gear.GearTypes.ALL.get();
+    }
+
+    /** The item being planned, or null. */
+    @Nullable
+    static GearItem plannedGearItem() {
+        return GearCatalog.gearItem(STATE.gearItem);
+    }
+
     // =============================================================================================
     // Setup
 
@@ -120,7 +133,7 @@ public class SimulatorScreen extends Screen {
         rightW = width - rightX - PAD;
 
         int half = (leftW - 4) / 2;
-        int row2 = PAD + 26;
+        int row2 = TOP + 26;
         mixedButton = addRenderableWidget(Button.builder(mixedLabel(), b -> {
             STATE.mixedMaterials = !STATE.mixedMaterials;
             b.setMessage(mixedLabel());
@@ -133,7 +146,7 @@ public class SimulatorScreen extends Screen {
             markDirty();
         }).bounds(leftX + half + 4, row2, half, 20).build());
 
-        partsTop = PAD + 50;
+        partsTop = TOP + 50;
         partsBottom = height - PAD - 24;
 
         int bottomY = height - PAD - 20;
@@ -145,7 +158,7 @@ public class SimulatorScreen extends Screen {
                 .bounds(leftX + half + 4, bottomY, half, 20).build());
 
         previewX = rightX + 4;
-        previewY = PAD + 4;
+        previewY = TOP + 4;
         markDirty();
     }
 
@@ -246,6 +259,7 @@ public class SimulatorScreen extends Screen {
         int uy = overPopup ? -1000 : mouseY;
 
         super.render(g, ux, uy, partialTick);
+        Tabs.render(g, font, Tabs.Tab.GEAR, ux, uy);
         hits.clear();
         materialTooltipShown = false;
 
@@ -366,7 +380,7 @@ public class SimulatorScreen extends Screen {
     }
 
     private void renderGearSelector(GuiGraphics g, @Nullable GearItem gearItem, int mx, int my) {
-        int x = leftX, y = PAD, w = leftW, h = 22;
+        int x = leftX, y = TOP, w = leftW, h = 22;
         boolean hover = mx >= x && mx < x + w && my >= y && my < y + h;
         panel(g, x, y, w, h, hover ? 0xC0303040 : 0xC0101018);
         if (gearItem != null) {
@@ -558,7 +572,7 @@ public class SimulatorScreen extends Screen {
     }
 
     private void renderPreview(GuiGraphics g, int mx, int my) {
-        panel(g, rightX, PAD, rightW, height - PAD * 2, 0x90000000);
+        panel(g, rightX, TOP, rightW, height - TOP - PAD, 0x90000000);
 
         // Big icon
         int box = 72;
@@ -742,7 +756,7 @@ public class SimulatorScreen extends Screen {
         closePopup();
         popupSlot = null;
         popup = new ListPopup<>(font, rows, List.of(), STATE.gearItem, null, false,
-                leftX, PAD + 24, Math.max(160, leftW), width, height, Component.translatable("sgsim.search"));
+                leftX, TOP + 24, Math.max(160, leftW), width, height, Component.translatable("sgsim.search"));
         addWidget(popup.search);
         setFocused(popup.search);
     }
@@ -896,6 +910,7 @@ public class SimulatorScreen extends Screen {
             }
             return true;
         }
+        if (Tabs.click(minecraft, font, Tabs.Tab.GEAR, mouseX, mouseY)) return true;
         if (super.mouseClicked(mouseX, mouseY, button)) return true;
         for (Hit hit : List.copyOf(hits)) {
             if (hit.click() != null && hit.contains(mouseX, mouseY)) {
